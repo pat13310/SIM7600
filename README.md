@@ -300,7 +300,7 @@ Ce script principal illustre l'utilisation typique de la classe SIMGPS, avec ouv
 ## Matériels nécessaires
 <image src="https://github.com/user-attachments/assets/0a546fb1-bd19-48cc-8baa-9fa6e748a9d2" height="200px">
 <br>
-Comme illustré sur l'image, il faudra rajouter l"antenne pour fixer correctement le signal GPS.
+> **Note :** Comme illustré sur l'image, il faudra rajouter l"antenne pour fixer correctement le signal GPS.
 
 Cette classe SIMGPS offre une interface simple pour gérer les fonctionnalités GPS d'un modem SIM7600, permettant une intégration facile dans des projets nécessitant des capacités de géolocalisation.
 
