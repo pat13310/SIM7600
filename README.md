@@ -210,6 +210,3 @@ if __name__ == "__main__":
 ```
 
 Ce script principal illustre l'utilisation typique de la classe SIM7600SMS, avec ouverture de la connexion, vérification de la carte SIM, envoi et lecture de SMS, et fermeture propre de la connexion.
-
-Citations:
-[1] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/19879401/4330e61b-6064-47a8-aab1-ac3710d02148/paste.txt
