@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="5501eb73-bcad-4c8b-be20-a9b28e4fe91c" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/SIM7600.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SIM7600/NMEParser.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SIM7600/SIM7600.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SIM7600/SIM7600Audio.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SIM7600/SIM7600Data.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SIM7600/SIM7600Modem.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SIM7600/SIM7600Network.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SIM7600/SIM7600SMS.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SIM7600/SIM7600Voice.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SIM7600/SIMGPS.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SIM7600/SIMMQTT.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SIM7600/SerialPortCategorizer.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SIM7600/TextToSpeech.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SIM7600/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/common.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/list_usb.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2mKLctvrm4mJGf0SjYRm310YpXq" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Python.Audio_check.executor&quot;: &quot;Run&quot;,
+    &quot;Python.Audio_test_R.executor&quot;: &quot;Run&quot;,
+    &quot;Python.NMEParser.executor&quot;: &quot;Run&quot;,
+    &quot;Python.PhoneCall.executor&quot;: &quot;Run&quot;,
+    &quot;Python.SIM7600.executor&quot;: &quot;Run&quot;,
+    &quot;Python.SIM7600Audio.executor&quot;: &quot;Run&quot;,
+    &quot;Python.SIM7600Data.executor&quot;: &quot;Run&quot;,
+    &quot;Python.SIM7600GPS.executor&quot;: &quot;Run&quot;,
+    &quot;Python.SIM7600Modem.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.SIM7600Network.executor&quot;: &quot;Run&quot;,
+    &quot;Python.SIM7600SMS.executor&quot;: &quot;Run&quot;,
+    &quot;Python.SIM7600Voice.executor&quot;: &quot;Debug&quot;,
+    &quot;Python.SIMGPS.executor&quot;: &quot;Run&quot;,
+    &quot;Python.SIMMQTT.executor&quot;: &quot;Run&quot;,
+    &quot;Python.SIMMqtt.executor&quot;: &quot;Run&quot;,
+    &quot;Python.SerialPortCategorizer.executor&quot;: &quot;Run&quot;,
+    &quot;Python.TextToSpeech.executor&quot;: &quot;Run&quot;,
+    &quot;Python.common.executor&quot;: &quot;Run&quot;,
+    &quot;Python.list_usb.executor&quot;: &quot;Run&quot;,
+    &quot;Python.main.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;ignore.virus.scanning.warn.message&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;editor.preferences.tabs&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\p-gar\PycharmProjects\SIM7600\SIM7600" />
+    </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="SIM7600" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="SIM7600" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/SIM7600" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SIM7600/SIM7600.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.SIM7600" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-d6986cc7102b-7c0b70fcd90d-JavaScript-PY-242.21829.153" />
+        <option value="bundled-python-sdk-464836ebc622-b74155a9e76b-com.jetbrains.pycharm.pro.sharedIndexes.bundled-PY-242.21829.153" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5501eb73-bcad-4c8b-be20-a9b28e4fe91c" name="Changes" comment="" />
+      <created>1726820404230</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1726820404230</updated>
+      <workItem from="1726820408468" duration="624000" />
+      <workItem from="1726825504810" duration="14178000" />
+      <workItem from="1726903665755" duration="17731000" />
+      <workItem from="1726987431948" duration="18185000" />
+      <workItem from="1727077573539" duration="7113000" />
+      <workItem from="1727089020992" duration="8298000" />
+      <workItem from="1727115223136" duration="1396000" />
+      <workItem from="1727162189022" duration="704000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/main.py</url>
+          <line>21</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/main.py</url>
+          <line>12</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/list_usb.py</url>
+          <line>46</line>
+          <option name="timeStamp" value="24" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/app/list_usb.py</url>
+          <line>29</line>
+          <option name="timeStamp" value="25" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/SIM7600/SIMGPS.py</url>
+          <line>36</line>
+          <option name="timeStamp" value="35" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/SIM7600/SIMGPS.py</url>
+          <line>24</line>
+          <option name="timeStamp" value="37" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/SIM7600/SIMMQTT.py</url>
+          <line>108</line>
+          <option name="timeStamp" value="48" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/SIM7600/SIMMQTT.py</url>
+          <line>104</line>
+          <option name="timeStamp" value="49" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/SIM7600/SIMMQTT.py</url>
+          <line>44</line>
+          <option name="timeStamp" value="53" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/SIM7600/SIM7600SMS.py</url>
+          <line>64</line>
+          <option name="timeStamp" value="59" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/SIM7600/SIM7600SMS.py</url>
+          <line>80</line>
+          <option name="timeStamp" value="60" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/SIM7600/SIM7600SMS.py</url>
+          <line>66</line>
+          <option name="timeStamp" value="61" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/SIM7600/SIMMQTT.py</url>
+          <line>112</line>
+          <option name="timeStamp" value="63" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/SIM7600/SIM7600.py</url>
+          <line>187</line>
+          <option name="timeStamp" value="73" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/SIM7600/SIM7600.py</url>
+          <line>113</line>
+          <option name="timeStamp" value="76" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/SIM7600/SIM7600.py</url>
+          <line>226</line>
+          <option name="timeStamp" value="77" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/SIM7600/SIM7600.py</url>
+          <line>265</line>
+          <option name="timeStamp" value="80" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/SIM7600/SIM7600Modem.py</url>
+          <line>36</line>
+          <option name="timeStamp" value="81" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/SIM7600/SIM7600Voice.py</url>
+          <line>121</line>
+          <option name="timeStamp" value="83" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/SIM7600/SIM7600Voice.py</url>
+          <line>137</line>
+          <option name="timeStamp" value="84" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/SIM7600$SIM7600GPS.coverage" NAME="SIM7600GPS Coverage Results" MODIFIED="1726837843190" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SIM7600" />
+    <SUITE FILE_PATH="coverage/SIM7600$SIM7600Voice.coverage" NAME="SIM7600Voice Coverage Results" MODIFIED="1727115427678" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SIM7600" />
+    <SUITE FILE_PATH="coverage/SIM7600$SIMMqtt.coverage" NAME="SIMMqtt Coverage Results" MODIFIED="1726848607496" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SIM7600" />
+    <SUITE FILE_PATH="coverage/SIM7600$TextToSpeech.coverage" NAME="TextToSpeech Coverage Results" MODIFIED="1727090384292" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SIM7600" />
+    <SUITE FILE_PATH="coverage/SIM7600$SIM7600Audio.coverage" NAME="SIM7600Audio Coverage Results" MODIFIED="1727103332319" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SIM7600" />
+    <SUITE FILE_PATH="coverage/SIM7600$main.coverage" NAME="main Coverage Results" MODIFIED="1726835355537" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
+    <SUITE FILE_PATH="coverage/SIM7600$SIM7600.coverage" NAME="SIM7600 Coverage Results" MODIFIED="1727115334793" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SIM7600" />
+    <SUITE FILE_PATH="coverage/SIM7600$SIMMQTT.coverage" NAME="SIMMQTT Coverage Results" MODIFIED="1727003647743" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SIM7600" />
+    <SUITE FILE_PATH="coverage/SIM7600$Audio_check.coverage" NAME="Audio_check Coverage Results" MODIFIED="1727093383404" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/AppData/Local/Temp/b1c878b2-8249-4073-aab6-7512dd5acde1_SIM7600H-G_4G_Module_PhoneCall_code.zip.de1" />
+    <SUITE FILE_PATH="coverage/SIM7600$SIM7600SMS.coverage" NAME="SIM7600SMS Coverage Results" MODIFIED="1727080893744" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SIM7600" />
+    <SUITE FILE_PATH="coverage/SIM7600$NMEParser.coverage" NAME="NMEParser Coverage Results" MODIFIED="1726837807624" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SIM7600" />
+    <SUITE FILE_PATH="coverage/SIM7600$SIM7600Data.coverage" NAME="SIM7600Data Coverage Results" MODIFIED="1726989005593" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SIM7600" />
+    <SUITE FILE_PATH="coverage/SIM7600$list_usb.coverage" NAME="list_usb Coverage Results" MODIFIED="1727100701922" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
+    <SUITE FILE_PATH="coverage/SIM7600$SIMGPS.coverage" NAME="SIMGPS Coverage Results" MODIFIED="1726998978624" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SIM7600" />
+    <SUITE FILE_PATH="coverage/SIM7600$SIM7600Network.coverage" NAME="SIM7600Network Coverage Results" MODIFIED="1726990053958" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SIM7600" />
+    <SUITE FILE_PATH="coverage/SIM7600$Audio_test_R.coverage" NAME="Audio_test_R Coverage Results" MODIFIED="1727093415532" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/AppData/Local/Temp/0ac4e1dd-48b7-4ac3-b25a-bdf6a79871e5_SIM7600H-G_4G_Module_PhoneCall_code.zip.1e5" />
+    <SUITE FILE_PATH="coverage/SIM7600$SIM7600Modem.coverage" NAME="SIM7600Modem Coverage Results" MODIFIED="1727080549106" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SIM7600" />
+    <SUITE FILE_PATH="coverage/SIM7600$SerialPortCategorizer.coverage" NAME="SerialPortCategorizer Coverage Results" MODIFIED="1727102536987" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SIM7600" />
+    <SUITE FILE_PATH="coverage/SIM7600$common.coverage" NAME="common Coverage Results" MODIFIED="1727029069015" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
+    <SUITE FILE_PATH="coverage/SIM7600$PhoneCall.coverage" NAME="PhoneCall Coverage Results" MODIFIED="1727093507079" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/AppData/Local/Temp/fddeb435-5edd-46cc-8d0b-85aba358100c_SIM7600H-G_4G_Module_PhoneCall_code.zip.00c" />
+  </component>
+</project>
