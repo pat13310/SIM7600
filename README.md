@@ -209,3 +209,94 @@ if __name__ == "__main__":
 ```
 
 Ce script principal illustre l'utilisation typique de la classe SIM7600SMS, avec ouverture de la connexion, vérification de la carte SIM, envoi et lecture de SMS, et fermeture propre de la connexion.
+<br>
+Voici la description de la classe SIMGPS et ses principales fonctions en format Markdown :
+
+## Classe SIMGPS
+
+La classe SIMGPS hérite de SIM7600 et ajoute des fonctionnalités spécifiques pour la gestion du GPS.
+
+### Initialisation
+
+```python
+gps = SIMGPS(port="COM16", baudrate=115200, timeout=2)
+```
+
+Cette ligne crée une instance de la classe SIMGPS, configurée pour communiquer via le port COM16 avec un débit de 115200 bauds et un délai d'attente de 2 secondes.
+
+### Fonctions principales
+
+#### Activation du GPS
+
+```python
+gps.enable_gps()
+```
+
+Cette fonction active le module GPS du modem.
+
+#### Récupération des données GPS
+
+```python
+gps_data = gps.get_gps_data()
+if gps_data:
+    print(f"Données GPS : {gps_data}")
+else:
+    print("Aucune donnée GPS valide reçue.")
+```
+
+Cette fonction récupère les données GPS actuelles du modem.
+
+#### Désactivation du GPS
+
+```python
+gps.disable_gps()
+```
+
+Cette fonction désactive le module GPS du modem.
+
+### Gestion des erreurs
+
+La classe SIMGPS intègre une gestion des erreurs robuste :
+
+- Logging des erreurs et des informations importantes.
+- Gestion des exceptions pour les opérations critiques.
+
+## Utilisation dans un script principal
+
+```python
+def main():
+    gps = SIMGPS(port="COM16")
+    try:
+        gps.open_connection()
+        gps.enable_gps()
+        
+        # Attente pour obtenir un fix GPS
+        time.sleep(5)
+        
+        for _ in range(100):
+            gps_data = gps.get_gps_data()
+            if gps_data:
+                logging.info(f"Données GPS : {gps_data}")
+            else:
+                logging.error("Aucune donnée GPS valide reçue.")
+        
+        gps.disable_gps()
+    except Exception as e:
+        logging.error(f"Erreur : {e}")
+    finally:
+        gps.close_connection()
+
+if __name__ == "__main__":
+    main()
+```
+
+Ce script principal illustre l'utilisation typique de la classe SIMGPS, avec ouverture de la connexion, activation du GPS, récupération des données GPS en boucle, désactivation du GPS, et fermeture propre de la connexion.
+
+## Particularités
+
+- La classe utilise des commandes AT spécifiques pour gérer le GPS (AT+CGPS).
+- Un délai est introduit après l'activation du GPS pour permettre l'obtention d'un fix.
+- La récupération des données GPS se fait en boucle pour obtenir des mises à jour continues.
+
+Cette classe SIMGPS offre une interface simple pour gérer les fonctionnalités GPS d'un modem SIM7600, permettant une intégration facile dans des projets nécessitant des capacités de géolocalisation.
+
