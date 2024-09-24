@@ -107,8 +107,7 @@ La classe utilise le module `logging` avec une configuration colorée pour facil
 
 Cette classe SIM7600 offre une interface complète pour gérer les communications cellulaires, permettant un contrôle fin du modem et l'accès à diverses informations réseau.
 
-
-Je m'excuse pour la confusion. Voici la description corrigée de la classe SIM7600SMS et ses principales fonctions en format Markdown, en utilisant "sms" au lieu de "sms_modem" :
+<br>
 
 ## Classe SIM7600SMS
 
