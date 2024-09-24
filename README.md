@@ -302,4 +302,96 @@ Ce script principal illustre l'utilisation typique de la classe SIMGPS, avec ouv
 <br>
 💡 <b>Remarque</b> : Comme illustré sur l'image, il faudra rajouter l"antenne pour fixer correctement le signal GPS.<br>
 Cette classe SIMGPS offre une interface simple pour gérer les fonctionnalités GPS d'un modem SIM7600, permettant une intégration facile dans des projets nécessitant des capacités de géolocalisation.
+<br>
 
+## Classe SIM7600MQTT
+
+La classe SIM7600MQTT hérite de SIM7600 et ajoute des fonctionnalités pour la communication MQTT via un modem cellulaire.
+
+### Initialisation
+
+```python
+mqtt_modem = SIM7600MQTT(port="COM17", apn="m2m.lebara.fr", broker="test.mosquitto.org", port_mqtt=1883)
+```
+
+Cette ligne crée une instance de la classe SIM7600MQTT, configurée pour communiquer via le port COM17, utiliser l'APN "m2m.lebara.fr", et se connecter au broker MQTT "test.mosquitto.org" sur le port 1883.
+
+### Fonctions principales
+
+#### Configuration de l'APN
+
+```python
+mqtt_modem.configure_apn()
+```
+
+Cette fonction configure l'APN pour la connexion de données cellulaires.
+
+#### Établissement de la connexion
+
+```python
+ip = mqtt_modem.connect()
+print(f"Adresse IP: {ip}")
+```
+
+Cette fonction établit une connexion de données GPRS et retourne l'adresse IP attribuée.
+
+#### Connexion au broker MQTT
+
+```python
+mqtt_modem.connect_mqtt()
+```
+
+Cette fonction connecte le client Paho MQTT au broker spécifié.
+
+#### Publication de messages MQTT
+
+```python
+mqtt_modem.publish("test/topic", "Hello, MQTT via SIM7600!")
+```
+
+Cette fonction publie un message sur un topic MQTT spécifié.
+
+#### Fermeture des connexions
+
+```python
+mqtt_modem.close()
+```
+
+Cette fonction ferme la connexion au broker MQTT et la connexion série.
+
+### Callbacks MQTT
+
+La classe définit également des callbacks pour gérer les événements MQTT :
+
+- `on_connect`: Appelé lors de la connexion au broker
+- `on_message`: Appelé lors de la réception d'un message
+- `on_publish`: Appelé après la publication d'un message
+
+## Utilisation dans un script principal
+
+```python
+if __name__ == "__main__":
+    logging.basicConfig(level=logging.INFO)
+    mqtt_modem = SIM7600MQTT(port="COM17", apn="m2m.lebara.fr", broker="test.mosquitto.org")
+
+    try:
+        ip = mqtt_modem.connect()
+        logging.info(f"Adresse IP: {ip}")
+
+        mqtt_modem.connect_mqtt()
+
+        for i in range(10000):
+            message = f"Message {i}: Hello, MQTT via SIM7600!"
+            mqtt_modem.publish("test/topic", message)
+
+        time.sleep(2)
+
+    except Exception as e:
+        logging.error(f"Erreur: {e}")
+    finally:
+        mqtt_modem.close()
+```
+
+Ce script principal illustre l'utilisation typique de la classe SIM7600MQTT, avec l'établissement de la connexion cellulaire, la connexion au broker MQTT, la publication de messages en boucle, et la fermeture propre des connexions.
+
+Cette classe SIM7600MQTT offre une interface simple pour combiner les fonctionnalités d'un modem cellulaire SIM7600 avec la communication MQTT, permettant une intégration facile dans des projets IoT nécessitant une connectivité cellulaire.
