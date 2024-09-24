@@ -395,3 +395,84 @@ if __name__ == "__main__":
 Ce script principal illustre l'utilisation typique de la classe SIM7600MQTT, avec l'établissement de la connexion cellulaire, la connexion au broker MQTT, la publication de messages en boucle, et la fermeture propre des connexions.
 
 Cette classe SIM7600MQTT offre une interface simple pour combiner les fonctionnalités d'un modem cellulaire SIM7600 avec la communication MQTT, permettant une intégration facile dans des projets IoT nécessitant une connectivité cellulaire.
+
+<br>
+
+## Classe SerialPortCategorizer
+Voici des exemples d'utilisation pour chaque fonction de la classe SerialPortCategorizer :
+
+### Initialisation
+
+```python
+port_categorizer = SerialPortCategorizer()
+```
+
+Cette ligne crée une instance de SerialPortCategorizer et catégorise automatiquement les ports disponibles.
+
+### Affichage des ports catégorisés
+
+```python
+port_categorizer.display_ports()
+```
+
+Cette fonction affichera tous les ports catégorisés, par exemple :
+
+```
+Ports COM catégorisés :
+  Nom du port: COM3, Description: Simcom AT Port, Catégorie: AT
+  Nom du port: COM4, Description: Simcom GPS Port, Catégorie: GPS
+  Nom du port: COM5, Description: Simcom Modem Port, Catégorie: Modem
+  Aucun port trouvé dans la catégorie Audio
+  Aucun port trouvé dans la catégorie Diagnostic
+```
+
+### Obtention des ports par catégorie
+
+```python
+gps_ports = port_categorizer.get_ports_by_category("GPS")
+for port in gps_ports:
+    print(f"Port GPS trouvé : {port.device}")
+```
+
+Cette fonction retourne une liste de ports pour une catégorie donnée.
+
+### Obtention du premier port d'une catégorie
+
+```python
+at_port = port_categorizer.get_port("AT")
+if at_port:
+    print(f"Premier port AT trouvé : {at_port}")
+else:
+    print("Aucun port AT trouvé")
+```
+
+Cette fonction retourne le nom du premier port trouvé pour une catégorie spécifique.
+
+### Utilisation dans un script principal
+
+```python
+def main():
+    port_categorizer = SerialPortCategorizer()
+    
+    # Afficher tous les ports catégorisés
+    port_categorizer.display_ports()
+    
+    # Obtenir et afficher le port GPS
+    gps_port = port_categorizer.get_port("GPS")
+    print(f"Port GPS : {gps_port}")
+    
+    # Obtenir et afficher le port AT
+    at_port = port_categorizer.get_port("AT")
+    print(f"Port AT : {at_port}")
+    
+    # Obtenir et afficher tous les ports modem
+    modem_ports = port_categorizer.get_ports_by_category("MODEM")
+    print("Ports Modem :")
+    for port in modem_ports:
+        print(f"  {port.device}")
+
+if __name__ == "__main__":
+    main()
+```
+
+Ce script principal démontre l'utilisation de toutes les fonctions de la classe SerialPortCategorizer, en affichant les ports catégorisés, en obtenant des ports spécifiques, et en listant tous les ports d'une catégorie donnée.
