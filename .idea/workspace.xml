@@ -4,31 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="5501eb73-bcad-4c8b-be20-a9b28e4fe91c" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/SIM7600.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SIM7600/NMEParser.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SIM7600/SIM7600.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SIM7600/SIM7600Audio.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SIM7600/SIM7600Data.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SIM7600/SIM7600Modem.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SIM7600/SIM7600Network.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SIM7600/SIM7600SMS.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SIM7600/SIM7600Voice.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SIM7600/SIMGPS.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SIM7600/SIMMQTT.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SIM7600/SerialPortCategorizer.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SIM7600/TextToSpeech.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SIM7600/__init__.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/common.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/list_usb.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/app/main.py" afterDir="false" />
-    </list>
+    <list default="true" id="5501eb73-bcad-4c8b-be20-a9b28e4fe91c" name="Changes" comment="Version de Base" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -44,6 +20,12 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/pat13310/SIM7600",
+    "accountId": "330486bb-5fc7-497b-96bc-5f4cab2a06f6"
+  }
+}]]></component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 7
 }</component>
@@ -145,12 +127,25 @@
       <workItem from="1727077573539" duration="7113000" />
       <workItem from="1727089020992" duration="8298000" />
       <workItem from="1727115223136" duration="1396000" />
-      <workItem from="1727162189022" duration="704000" />
+      <workItem from="1727162189022" duration="1349000" />
     </task>
+    <task id="LOCAL-00001" summary="Version de Base">
+      <option name="closed" value="true" />
+      <created>1727168361558</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1727168361558</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Version de Base" />
+    <option name="LAST_COMMIT_MESSAGE" value="Version de Base" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -265,7 +260,7 @@
     <SUITE FILE_PATH="coverage/SIM7600$TextToSpeech.coverage" NAME="TextToSpeech Coverage Results" MODIFIED="1727090384292" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SIM7600" />
     <SUITE FILE_PATH="coverage/SIM7600$SIM7600Audio.coverage" NAME="SIM7600Audio Coverage Results" MODIFIED="1727103332319" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SIM7600" />
     <SUITE FILE_PATH="coverage/SIM7600$main.coverage" NAME="main Coverage Results" MODIFIED="1726835355537" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />
-    <SUITE FILE_PATH="coverage/SIM7600$SIM7600.coverage" NAME="SIM7600 Coverage Results" MODIFIED="1727115334793" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SIM7600" />
+    <SUITE FILE_PATH="coverage/SIM7600$SIM7600.coverage" NAME="SIM7600 Coverage Results" MODIFIED="1727162803712" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SIM7600" />
     <SUITE FILE_PATH="coverage/SIM7600$SIMMQTT.coverage" NAME="SIMMQTT Coverage Results" MODIFIED="1727003647743" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SIM7600" />
     <SUITE FILE_PATH="coverage/SIM7600$Audio_check.coverage" NAME="Audio_check Coverage Results" MODIFIED="1727093383404" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/AppData/Local/Temp/b1c878b2-8249-4073-aab6-7512dd5acde1_SIM7600H-G_4G_Module_PhoneCall_code.zip.de1" />
     <SUITE FILE_PATH="coverage/SIM7600$SIM7600SMS.coverage" NAME="SIM7600SMS Coverage Results" MODIFIED="1727080893744" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/SIM7600" />
