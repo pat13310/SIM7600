@@ -1,7 +1,7 @@
 ## Module SIM 7600
 <image src="https://github.com/user-attachments/assets/a084f882-9833-4f40-a591-5fafea92a3cc" height="250px">
 
-Voici la description de la classe SIM7600 et ses principales fonctions en format Markdown :
+Voici la description de la classe SIM7600 et ses principales classes :
 
 ## Classe SIM7600
 
