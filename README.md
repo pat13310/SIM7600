@@ -107,5 +107,109 @@ La classe utilise le module `logging` avec une configuration colorée pour facil
 
 Cette classe SIM7600 offre une interface complète pour gérer les communications cellulaires, permettant un contrôle fin du modem et l'accès à diverses informations réseau.
 
+
+Je m'excuse pour la confusion. Voici la description corrigée de la classe SIM7600SMS et ses principales fonctions en format Markdown, en utilisant "sms" au lieu de "sms_modem" :
+
+## Classe SIM7600SMS
+
+La classe SIM7600SMS hérite de SIM7600 et ajoute des fonctionnalités spécifiques pour la gestion des SMS.
+
+### Initialisation
+
+```python
+sms = SIM7600SMS(port="COM17", baudrate=115200, timeout=2)
+```
+
+Cette ligne crée une instance de la classe SIM7600SMS, configurée pour communiquer via le port COM17 avec un débit de 115200 bauds et un délai d'attente de 2 secondes.
+
+### Fonctions principales
+
+#### Vérification de la carte SIM
+
+```python
+if sms.check_sim_card():
+    print("Carte SIM détectée et prête")
+else:
+    print("Problème avec la carte SIM")
+```
+
+Cette fonction vérifie si une carte SIM est présente et prête à être utilisée.
+
+#### Envoi de SMS
+
+```python
+response = sms.send_sms("0612345678", "Bonjour, ceci est un test!")
+print(f"Réponse de l'envoi de SMS : {response}")
+```
+
+Cette fonction envoie un SMS au numéro spécifié avec le message donné.
+
+#### Lecture des SMS
+
+```python
+sms_list = sms.read_sms()
+print(f"SMS reçus : {sms_list}")
+```
+
+Cette fonction récupère tous les SMS stockés dans la mémoire du modem.
+
+#### Suppression de SMS
+
+```python
+sms.delete_sms(1)
+```
+
+Cette fonction supprime le SMS à l'index spécifié.
+
+### Fonctionnalités supplémentaires
+
+#### Lecture avec suppression automatique
+
+```python
+sms_list = sms.read_sms(delete_action=True)
+print(f"SMS lus et supprimés : {sms_list}")
+```
+
+Cette option permet de lire tous les SMS et de les supprimer automatiquement après la lecture.
+
+#### Lecture de la réponse du modem
+
+```python
+response = sms.read_response()
+print(f"Réponse du modem : {response}")
+```
+
+Cette fonction lit la réponse du module série, utile pour le débogage ou la gestion des réponses asynchrones.
+
+## Gestion des erreurs
+
+La classe SIM7600SMS intègre une gestion des erreurs robuste :
+
+- Vérification de la présence de la carte SIM avant chaque opération SMS.
+- Logging des erreurs et des informations importantes.
+- Gestion des exceptions pour les opérations critiques.
+
+## Utilisation dans un script principal
+
+```python
+def main():
+    sms = SIM7600SMS(port="COM17")
+    try:
+        sms.open_connection()
+        if sms.check_sim_card():
+            sms.send_sms("0612345678", "Message test")
+            sms_list = sms.read_sms()
+            print(f"SMS reçus : {sms_list}")
+    except Exception as e:
+        logging.error(f"Erreur : {e}")
+    finally:
+        sms.close_connection()
+
+if __name__ == "__main__":
+    main()
+```
+
+Ce script principal illustre l'utilisation typique de la classe SIM7600SMS, avec ouverture de la connexion, vérification de la carte SIM, envoi et lecture de SMS, et fermeture propre de la connexion.
+
 Citations:
 [1] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/19879401/4330e61b-6064-47a8-aab1-ac3710d02148/paste.txt
