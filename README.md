@@ -500,9 +500,9 @@ Initialise une instance de `SIM7600Info`.
 sim7600 = SIM7600Info(port="COM17")
 ```
 
-### Méthodes
 
-#### `get_firmware_version(self)`
+
+### Version du firmware`get_firmware_version(self)`
 
 Récupère la version du firmware du module SIM7600.
 
@@ -513,12 +513,10 @@ version = sim7600.get_firmware_version()
 print("Version du firmware:", version)
 ```
 
-#### `get_manufacturer(self)`
+### Nom du fabricant `get_manufacturer(self)`
 
 Récupère le nom du fabricant du module SIM7600.
 
-#### Retourne
-- (str): Le nom du fabricant sous forme de chaîne, ou un message d'erreur si non trouvé.
 
 #### Exemple
 ```python
@@ -526,7 +524,7 @@ manufacturer = sim7600.get_manufacturer()
 print("Fabricant:", manufacturer)
 ```
 
-#### Lecture du numéro de série `get_serial_number(self)`
+### Lecture du numéro de série de série `get_serial_number(self)`
 
 Récupère le numéro de série du module SIM7600.
 
@@ -537,7 +535,7 @@ serial_number = sim7600.get_serial_number()
 print("Numéro de série:", serial_number)
 ```
 
-#### Lecture du numéro de version du module `get_module_version(self)`
+### Lecture du numéro de version du module `get_module_version(self)`
 
 Récupère la version du module SIM7600 sous forme de chaîne
 
@@ -547,7 +545,7 @@ module_version = sim7600.get_module_version()
 print("Version du module:", module_version)
 ```
 
-#### Lecture des informations de la puce `get_chip_info(self)`
+### Lecture des informations de la puce `get_chip_info(self)`
 
 Récupère les informations de la puce du module SIM7600, y compris la version du sous-système et la version du modem sous forme de dictionnaire
 
@@ -559,7 +557,7 @@ print("Informations de la puce: numéro de sub version", chip_info['sub_version'
 print("Informations de la puce: numéro du modem version", chip_info['modem_version')
 ```
 
-#### Récupération du model , le numéro de révision et l'IMEI `get_full_info(self)`
+### Récupération du model , le numéro de révision et l'IMEI `get_full_info(self)`
 
 Récupère des informations complètes sur le module SIM7600, y compris le modèle, la révision et l'IMEI.
 
@@ -570,7 +568,7 @@ full_info = sim7600.get_full_info()
 print("Informations complètes:", full_info)
 ```
 
-#### Afficher toutes les informations `print_all_info(self)`
+### Afficher toutes les informations `print_all_info(self)`
 
 Affiche toutes les informations du module SIM7600 en utilisant le module de logging.
 
