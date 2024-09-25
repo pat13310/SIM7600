@@ -476,3 +476,160 @@ if __name__ == "__main__":
 ```
 
 Ce script principal démontre l'utilisation de toutes les fonctions de la classe SerialPortCategorizer, en affichant les ports catégorisés, en obtenant des ports spécifiques, et en listant tous les ports d'une catégorie donnée.
+
+Voici la documentation de la classe `SIM7600Info` en format Markdown, incluant des descriptions détaillées de chaque méthode ainsi que des exemples d'utilisation.
+
+```markdown
+# SIM7600Info Class Documentation
+
+La classe `SIM7600Info` permet d'interagir avec le module SIM7600 et de récupérer des informations telles que la version du firmware, le fabricant, le numéro de série, la version du module, les informations sur la puce, et d'autres détails pertinents.
+
+## Héritage
+
+Cette classe hérite de la classe `SIM7600`.
+
+## Constructeur
+
+### `__init__(self, port, baudrate=115200, timeout=2)`
+
+Initialise une instance de `SIM7600Info`.
+
+#### Paramètres
+- `port` (str): Le port série à utiliser pour la communication avec le module SIM7600.
+- `baudrate` (int, optionnel): La vitesse de transmission (défaut: 115200).
+- `timeout` (int, optionnel): Le délai d'attente pour les opérations de communication (défaut: 2 secondes).
+
+#### Exemple
+```python
+sim7600 = SIM7600Info(port="COM17")
+```
+
+## Méthodes
+
+### `get_firmware_version(self)`
+
+Récupère la version du firmware du module SIM7600.
+
+#### Retourne
+- (str): La version du firmware sous forme de chaîne, ou un message d'erreur si non trouvée.
+
+#### Exemple
+```python
+version = sim7600.get_firmware_version()
+print("Version du firmware:", version)
+```
+
+### `get_manufacturer(self)`
+
+Récupère le nom du fabricant du module SIM7600.
+
+#### Retourne
+- (str): Le nom du fabricant sous forme de chaîne, ou un message d'erreur si non trouvé.
+
+#### Exemple
+```python
+manufacturer = sim7600.get_manufacturer()
+print("Fabricant:", manufacturer)
+```
+
+### `get_serial_number(self)`
+
+Récupère le numéro de série du module SIM7600.
+
+#### Retourne
+- (str): Le numéro de série sous forme de chaîne, ou un message d'erreur si non trouvé.
+
+#### Exemple
+```python
+serial_number = sim7600.get_serial_number()
+print("Numéro de série:", serial_number)
+```
+
+### `get_module_version(self)`
+
+Récupère la version du module SIM7600.
+
+#### Retourne
+- (str): La version du module sous forme de chaîne, ou un message d'erreur si non trouvée.
+
+#### Exemple
+```python
+module_version = sim7600.get_module_version()
+print("Version du module:", module_version)
+```
+
+### `get_chip_info(self)`
+
+Récupère les informations de la puce du module SIM7600, y compris la version du sous-système et la version du modem.
+
+#### Retourne
+- (dict ou str): Un dictionnaire contenant les informations de la puce, ou un message d'erreur si non trouvé.
+
+#### Exemple
+```python
+chip_info = sim7600.get_chip_info()
+print("Informations de la puce:", chip_info)
+```
+
+### `get_full_info(self)`
+
+Récupère des informations complètes sur le module SIM7600, y compris le modèle, la révision et l'IMEI.
+
+#### Retourne
+- (dict): Un dictionnaire contenant les informations du modèle, de la révision et de l'IMEI, ou des messages d'erreur si non trouvés.
+
+#### Exemple
+```python
+full_info = sim7600.get_full_info()
+print("Informations complètes:", full_info)
+```
+
+### `print_all_info(self)`
+
+Affiche toutes les informations du module SIM7600 en utilisant le module de logging.
+
+#### Exemple
+```python
+sim7600.print_all_info()
+```
+
+## Exemple d'utilisation
+
+Voici un exemple complet d'utilisation de la classe `SIM7600Info` :
+
+```python
+import logging
+from SIM7600Info import SIM7600Info
+
+# Configurer le logging
+logging.basicConfig(level=logging.INFO)
+
+def main():
+    sim_info = SIM7600Info(port="COM17")
+    
+    try:
+        sim_info.open_connection()
+        logging.info("Connexion réussie.")
+        sim_info.print_all_info()
+    except Exception as e:
+        logging.error(f"Erreur: {e}")
+    finally:
+        sim_info.close_connection()
+
+if __name__ == "__main__":
+    main()
+```
+
+## Notes
+
+- Assurez-vous que le port série est correctement configuré et que le module SIM7600 est connecté avant d'exécuter le script.
+- Les méthodes de cette classe reposent sur des commandes AT pour interagir avec le module, donc le module doit être compatible avec les commandes AT standard.
+```
+
+### Explications de la Documentation
+
+1. **Structure** : La documentation est organisée de manière à présenter d'abord la classe et son constructeur, suivis des méthodes avec des exemples d'utilisation.
+2. **Exemples** : Des exemples pratiques sont fournis pour chaque méthode, ce qui facilite la compréhension de leur utilisation.
+3. **Notes** : Des notes supplémentaires sont fournies à la fin pour informer l'utilisateur sur les prérequis et les considérations à garder à l'esprit lors de l'utilisation de la classe.
+
+Cette structure devrait rendre la documentation claire et utile pour les utilisateurs potentiels de la classe `SIM7600Info`. Si vous avez besoin de modifications ou d'ajouts, n'hésitez pas à demander !
