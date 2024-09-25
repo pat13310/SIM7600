@@ -535,7 +535,7 @@ serial_number = sim7600.get_serial_number()
 print("Numéro de série:", serial_number)
 ```
 
-### Lecture du numéro de version du module
+### Numéro de version du module
 
 Récupère la version du module SIM7600 sous forme de chaîne
 
