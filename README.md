@@ -557,7 +557,7 @@ print("Informations de la puce: numéro de sub version", chip_info['sub_version'
 print("Informations de la puce: numéro du modem version", chip_info['modem_version')
 ```
 
-### Récupération du model , le numéro de révision et l'IMEI 
+### Récupération du modèle , le numéro de révision et l'IMEI 
 
 Récupère des informations complètes sur le module SIM7600, y compris le modèle, la révision et l'IMEI.
 
@@ -565,7 +565,9 @@ Récupère des informations complètes sur le module SIM7600, y compris le modè
 #### Exemple
 ```python
 full_info = sim7600.get_full_info()
-print("Informations complètes:", full_info)
+print("Modèle: ", full_info['Modèle'])
+print("Révision: ", full_info['Révision'])
+print("IMEI: ", full_info['IMEI'])
 ```
 
 ### Afficher toutes les informations
