@@ -5,41 +5,6 @@ import paho.mqtt.client as mqtt
 
 from SIM7600 import SIM7600
 
-
-# class SIM7600:
-#     def __init__(self, port,baudrate=115200, timeout=2):
-#         self.port = port
-#         self.baudrate = baudrate
-#         self.timeout = timeout
-#         self.serial_conn = None
-#         #self.open_connection()
-#
-#     def open_connection(self):
-#         """Ouvre la connexion série."""
-#         try:
-#             self.serial_conn = serial.Serial(self.port, baudrate=115200, timeout=1)
-#             logging.info(f"Connexion série ouverte sur {self.port}.")
-#         except Exception as e:
-#             logging.error(f"Erreur lors de l'ouverture du port série: {e}")
-#             raise
-#
-#     def close_connection(self):
-#         """Ferme la connexion série."""
-#         if self.serial_conn and self.serial_conn.is_open:
-#             self.serial_conn.close()
-#             logging.info("Connexion série fermée.")
-#
-#     def send_command(self, command):
-#         """Envoie une commande au module SIM7600 et retourne la réponse."""
-#         if self.serial_conn and self.serial_conn.is_open:
-#             self.serial_conn.write((command + '\r\n').encode())
-#             time.sleep(1)  # Attendre la réponse
-#             response = self.serial_conn.read_all().decode()
-#             return response
-#         else:
-#             logging.error("Le port série n'est pas ouvert.")
-#             return ""
-
 class SIM7600MQTT(SIM7600):
     def __init__(self, port, apn, broker, port_mqtt=1883):
         super().__init__(port)

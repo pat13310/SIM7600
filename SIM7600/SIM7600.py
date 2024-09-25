@@ -60,7 +60,11 @@ class SIM7600:
         self.baudrate = baudrate
         self.timeout = timeout
         self.serial_conn = None
+        self.echo=True
         logging.info(f"Initialisation de SIM7600 sur le port {port}.")
+
+    def set_echo_command(self, b_echo):
+        self.echo=b_echo
 
     def open_connection(self):
         """Ouvre la connexion série."""
@@ -81,17 +85,21 @@ class SIM7600:
             self.serial_conn.close()
             logging.info("Connexion fermée.")
 
-    def send_command(self, command):
+    def send_command(self, command, b_show=False):
         """Envoie une commande AT et attend la réponse."""
         if not self.serial_conn or not self.serial_conn.is_open:
             raise SerialException("Le port série n'est pas ouvert.")
 
         # Envoyer la commande AT
-        logging.info(f"Envoi de la commande: {command}")
+        if self.echo:
+            logging.info(f"Envoi de la commande: {command}")
+
         self.serial_conn.write((command + '\r\n').encode('utf-8'))
 
         # Lire la réponse jusqu'à "OK"
         response = self.serial_conn.read_until(b"OK\r\n").decode('utf-8')
+        if not b_show:
+            response=response.replace("OK","")
         response = self.clean_message(response)
         return response
 
@@ -219,7 +227,6 @@ class SIM7600:
             result.update(self._parse_cereg_response(extended_response))
             result['signal_quality'] = signal_quality
             result['operator'] = operator_info
-
             self._enrich_network_info(result)
 
             return result
@@ -308,21 +315,28 @@ class SIM7600:
         """Affiche un résumé détaillé du statut réseau"""
         try:
             info = self.check_network_registration()
-            print("=== Statut du Réseau ===")
-            print(f"Enregistré: {'Oui' if info['registered'] else 'Non'}")
-            print(f"Statut: {info['status'].name}")
-            print(f"Type de réseau: {info['act'].name if info['act'] else 'Inconnu'}")
-            print(f"Génération: {info['network_generation']}")
-            print(f"Qualité du signal: {info['signal_quality']} dBm ({info['coverage_quality']})")
-            print(f"Opérateur: {info['operator']}")
-            print(f"LAC/TAC: {info['location_area_code'] or info['tac'] or 'N/A'}")
-            print(f"Cell ID/ECI: {info['cell_id'] or info['eci'] or 'N/A'}")
-            if info['location_info']['latitude']:
-                print(f"Position approximative: {info['location_info']['latitude']}, {info['location_info']['longitude']}")
-            print("========================")
-        except RegistrationError as e:
-            print(f"Erreur lors de la vérification du statut réseau: {e}")
+            signal_quality, quality_desc = self.get_signal_quality()
+            operator_info = self.get_operator_info()
+            network_mode = self.get_network_type_str()
 
+            logging.info("=== Statut du Réseau ===")
+            logging.info(f"Enregistré: {'Oui' if info['registered'] else 'Non'}")
+            logging.info(f"Statut: {info['status'].name}")
+            logging.info(f"Mode réseau actuel: {network_mode}")
+            logging.info(f"Type de réseau: {info['act'].name if info['act'] else 'Inconnu'}")
+            logging.info(f"Génération: {info['network_generation']}")
+            logging.info(f"Qualité du signal: {signal_quality} dBm ({quality_desc})")
+            logging.info(f"Opérateur: {operator_info}")
+            logging.info(f"LAC/TAC: {info.get('location_area_code') or info.get('tac') or 'N/A'}")
+            logging.info(f"Cell ID/ECI: {info.get('cell_id') or info.get('eci') or 'N/A'}")
+
+            if 'location_info' in info and info['location_info'].get('latitude'):
+                logging.info(
+                    f"Position approximative: {info['location_info']['latitude']}, {info['location_info']['longitude']}")
+
+            logging.info("========================")
+        except RegistrationError as e:
+            logging.error(f"Erreur lors de la vérification du statut réseau: {e}")
 
 def main():
     ports_to_try = ["COM17"]
