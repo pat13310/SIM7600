@@ -530,8 +530,6 @@ print("Fabricant:", manufacturer)
 
 Récupère le numéro de série du module SIM7600.
 
-#### Retourne
-- (str): Le numéro de série sous forme de chaîne, ou un message d'erreur si non trouvé.
 
 #### Exemple
 ```python
@@ -615,10 +613,4 @@ if __name__ == "__main__":
 - Les méthodes de cette classe reposent sur des commandes AT pour interagir avec le module, donc le module doit être compatible avec les commandes AT standard.
 ```
 
-### Explications de la Documentation
 
-1. **Structure** : La documentation est organisée de manière à présenter d'abord la classe et son constructeur, suivis des méthodes avec des exemples d'utilisation.
-2. **Exemples** : Des exemples pratiques sont fournis pour chaque méthode, ce qui facilite la compréhension de leur utilisation.
-3. **Notes** : Des notes supplémentaires sont fournies à la fin pour informer l'utilisateur sur les prérequis et les considérations à garder à l'esprit lors de l'utilisation de la classe.
-
-Cette structure devrait rendre la documentation claire et utile pour les utilisateurs potentiels de la classe `SIM7600Info`. Si vous avez besoin de modifications ou d'ajouts, n'hésitez pas à demander !
