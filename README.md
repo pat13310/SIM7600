@@ -475,18 +475,18 @@ if __name__ == "__main__":
 ```
 
 Ce script principal démontre l'utilisation de toutes les fonctions de la classe SerialPortCategorizer, en affichant les ports catégorisés, en obtenant des ports spécifiques, et en listant tous les ports d'une catégorie donnée.
-
-# SIM7600Info Class Documentation
+<br>
+## SIM7600Info Class Documentation
 
 La classe `SIM7600Info` permet d'interagir avec le module SIM7600 et de récupérer des informations telles que la version du firmware, le fabricant, le numéro de série, la version du module, les informations sur la puce, et d'autres détails pertinents.
 
-## Héritage
+### Héritage
 
 Cette classe hérite de la classe `SIM7600`.
 
-## Constructeur
+### Constructeur
 
-### `__init__(self, port, baudrate=115200, timeout=2)`
+#### `__init__(self, port, baudrate=115200, timeout=2)`
 
 Initialise une instance de `SIM7600Info`.
 
@@ -500,14 +500,12 @@ Initialise une instance de `SIM7600Info`.
 sim7600 = SIM7600Info(port="COM17")
 ```
 
-## Méthodes
+### Méthodes
 
-### `get_firmware_version(self)`
+#### `get_firmware_version(self)`
 
 Récupère la version du firmware du module SIM7600.
 
-#### Retourne
-- (str): La version du firmware sous forme de chaîne, ou un message d'erreur si non trouvée.
 
 #### Exemple
 ```python
@@ -515,7 +513,7 @@ version = sim7600.get_firmware_version()
 print("Version du firmware:", version)
 ```
 
-### `get_manufacturer(self)`
+#### `get_manufacturer(self)`
 
 Récupère le nom du fabricant du module SIM7600.
 
@@ -528,7 +526,7 @@ manufacturer = sim7600.get_manufacturer()
 print("Fabricant:", manufacturer)
 ```
 
-### `get_serial_number(self)`
+#### `get_serial_number(self)`
 
 Récupère le numéro de série du module SIM7600.
 
@@ -541,12 +539,9 @@ serial_number = sim7600.get_serial_number()
 print("Numéro de série:", serial_number)
 ```
 
-### `get_module_version(self)`
+#### `get_module_version(self)`
 
-Récupère la version du module SIM7600.
-
-#### Retourne
-- (str): La version du module sous forme de chaîne, ou un message d'erreur si non trouvée.
+Récupère la version du module SIM7600 sous forme de chaîne
 
 #### Exemple
 ```python
@@ -554,12 +549,10 @@ module_version = sim7600.get_module_version()
 print("Version du module:", module_version)
 ```
 
-### `get_chip_info(self)`
+#### `get_chip_info(self)`
 
-Récupère les informations de la puce du module SIM7600, y compris la version du sous-système et la version du modem.
+Récupère les informations de la puce du module SIM7600, y compris la version du sous-système et la version du modem sous forme de dictionnaire
 
-#### Retourne
-- (dict ou str): Un dictionnaire contenant les informations de la puce, ou un message d'erreur si non trouvé.
 
 #### Exemple
 ```python
