@@ -524,7 +524,7 @@ manufacturer = sim7600.get_manufacturer()
 print("Fabricant:", manufacturer)
 ```
 
-### Lecture du numéro de série de série 
+### Numéro de série
 
 Récupère le numéro de série du module SIM7600.
 
@@ -545,7 +545,7 @@ module_version = sim7600.get_module_version()
 print("Version du module:", module_version)
 ```
 
-### Lecture des informations de la puce
+### Informations de la puce
 
 Récupère les informations de la puce du module SIM7600, y compris la version du sous-système et la version du modem sous forme de dictionnaire
 
