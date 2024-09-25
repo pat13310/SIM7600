@@ -476,7 +476,7 @@ if __name__ == "__main__":
 
 Ce script principal démontre l'utilisation de toutes les fonctions de la classe SerialPortCategorizer, en affichant les ports catégorisés, en obtenant des ports spécifiques, et en listant tous les ports d'une catégorie donnée.
 <br>
-## SIM7600Info Class Documentation
+## Clase SIM7600Info 
 
 La classe `SIM7600Info` permet d'interagir avec le module SIM7600 et de récupérer des informations telles que la version du firmware, le fabricant, le numéro de série, la version du module, les informations sur la puce, et d'autres détails pertinents.
 
