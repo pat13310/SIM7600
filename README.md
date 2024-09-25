@@ -606,10 +606,8 @@ if __name__ == "__main__":
     main()
 ```
 
-## Notes
-
-- Assurez-vous que le port série est correctement configuré et que le module SIM7600 est connecté avant d'exécuter le script.
-- Les méthodes de cette classe reposent sur des commandes AT pour interagir avec le module, donc le module doit être compatible avec les commandes AT standard.
+<br>
+La classe SIM7600Info offre une interface facile à utiliser pour récupérer et afficher les informations du module SIM7600. En suivant cette documentation, vous devriez être en mesure de l'utiliser efficacement dans vos applications.
 
 
 
