@@ -1,5 +1,5 @@
 import logging
-from SIM7600 import SIM7600  # Assurez-vous que SIM7600 est bien en mode synchrone
+from SIM7600 import SIM7600Cmd  # Assurez-vous que SIM7600 est bien en mode synchrone
 
 
 class SIM7600Network(SIM7600):

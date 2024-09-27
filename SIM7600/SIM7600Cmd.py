@@ -1,4 +1,5 @@
 import re
+import time
 from typing import Dict, Any, Optional
 
 import serial
@@ -8,6 +9,7 @@ from enum import Enum
 import logging
 import colorlog
 
+
 class NetworkStatus(Enum):
     NOT_REGISTERED = 0
     REGISTERED_HOME = 1
@@ -15,6 +17,7 @@ class NetworkStatus(Enum):
     REGISTRATION_DENIED = 3
     UNKNOWN = 4
     REGISTERED_ROAMING = 5
+
 
 # class NetworkType(Enum):
 #     GSM = 0
@@ -30,12 +33,14 @@ class NetworkStatus(Enum):
 class RegistrationError(Exception):
     pass
 
+
 class NetworkType(Enum):
     G2 = 13  # GSM only
     G3 = 14  # WCDMA only
     G4 = 38  # LTE only
     G5 = 71  # NR only (5G)
     AUTO = 2  # Automatic
+
 
 # Configuration du logging
 def setup_logging():
@@ -53,18 +58,17 @@ def setup_logging():
 setup_logging()
 
 
-
-class SIM7600:
+class SIM7600Cmd:
     def __init__(self, port, baudrate=115200, timeout=2):
         self.port = port
         self.baudrate = baudrate
         self.timeout = timeout
         self.serial_conn = None
-        self.echo=True
+        self.echo = True
         logging.info(f"Initialisation de SIM7600 sur le port {port}.")
 
     def set_echo_command(self, b_echo):
-        self.echo=b_echo
+        self.echo = b_echo
 
     def open_connection(self):
         """Ouvre la connexion série."""
@@ -83,9 +87,9 @@ class SIM7600:
         """Ferme la connexion série."""
         if self.serial_conn and self.serial_conn.is_open:
             self.serial_conn.close()
-            logging.info("Connexion fermée.")
+            logging.info(f"Connexion fermée sur le port {self.port}.")
 
-    def send_command(self, command, b_show=False):
+    def send_command(self, command, show=False, raw=False):
         """Envoie une commande AT et attend la réponse."""
         if not self.serial_conn or not self.serial_conn.is_open:
             raise SerialException("Le port série n'est pas ouvert.")
@@ -94,13 +98,16 @@ class SIM7600:
         if self.echo:
             logging.info(f"Envoi de la commande: {command}")
 
-        self.serial_conn.write((command + '\r\n').encode('utf-8'))
+        self.serial_conn.write((command + '\r\n').encode('utf-8', errors='ignore'))
 
-        # Lire la réponse jusqu'à "OK"
+        return self.read_response(show=show, raw=raw)
+
+    def read_response(self, show=False, raw=False):
         response = self.serial_conn.read_until(b"OK\r\n").decode('utf-8')
-        if not b_show:
-            response=response.replace("OK","")
-        response = self.clean_message(response)
+        if not show:
+            response = response.replace("OK", "")
+        if not raw:
+            response = self.clean_message(response)
         return response
 
     def clean_message(self, message):
@@ -149,7 +156,7 @@ class SIM7600:
                     quality = "Faible"
                 else:
                     quality = "Très faible"
-                return dbm,quality
+                return dbm, quality
         else:
             return "Erreur: Impossible de récupérer la qualité du signal"
 
@@ -180,7 +187,7 @@ class SIM7600:
 
         # La réponse typique sera sous la forme "+CNMP: <mode>"
         if '+CNMP:' in response:
-            response=response.replace("OK","")
+            response = response.replace("OK", "")
             mode = response.split(':')[1].strip()
             mode = int(mode)  # Convertir en entier
 
@@ -202,7 +209,7 @@ class SIM7600:
             if network_mode == NetworkType.AUTO:
                 return "Automatique"
             else:
-                mode=network_mode.name.replace('G', '')  # Retourne '2', '3', '4', ou '5'
+                mode = network_mode.name.replace('G', '')  # Retourne '2', '3', '4', ou '5'
                 return f'Mode {mode}G'
         else:
             return "Inconnu"
@@ -220,7 +227,7 @@ class SIM7600:
         try:
             response = self.send_command('AT+CREG?')
             extended_response = self.send_command('AT+CEREG?')
-            signal_quality,_ = self.get_signal_quality()
+            signal_quality, _ = self.get_signal_quality()
             operator_info = self.get_operator_info()
 
             result = self._parse_creg_response(response)
@@ -263,7 +270,7 @@ class SIM7600:
 
         return {
             'tac': tac,  # Tracking Area Code (for 4G/5G)
-            'eci': ci,   # E-UTRAN Cell Identifier (for 4G/5G)
+            'eci': ci,  # E-UTRAN Cell Identifier (for 4G/5G)
             'act': NetworkType(act) if act is not None else None
         }
 
@@ -271,7 +278,8 @@ class SIM7600:
         """Enrichit les informations réseau avec des données supplémentaires"""
         result['network_generation'] = self._determine_network_generation(result.get('act'))
         result['coverage_quality'] = self._assess_coverage_quality(result.get('signal_quality'))
-        result['location_info'] = self._get_approximate_location(result.get('location_area_code'), result.get('cell_id'))
+        result['location_info'] = self._get_approximate_location(result.get('location_area_code'),
+                                                                 result.get('cell_id'))
 
     def _determine_network_generation(self, act: Optional[NetworkType]) -> str:
         if act is None:
@@ -338,13 +346,33 @@ class SIM7600:
         except RegistrationError as e:
             logging.error(f"Erreur lors de la vérification du statut réseau: {e}")
 
+    def enable_gps(self):
+        """Active le module GPS."""
+        response = self.send_command("AT+CGPS=1")  # Activer le GPS
+        if "CGPS" in response:
+            logging.info("GPS activé avec succès.")
+        else:
+            logging.error("Erreur lors de l'activation du GPS.")
+
+        self.close_connection()
+
+    def reset_module(self):
+        response = self.send_command("AT+CRESET")
+        if "CRESET" in response:
+            logging.info("Configurations du modem reset avec succès.")
+        else:
+            logging.error("Erreur lors du reset des configurations du modem.")
+
+
 def main():
     ports_to_try = ["COM17"]
     sim7600 = None
 
     for port in ports_to_try:
         try:
-            sim7600 = SIM7600(port)
+            sim7600 = SIM7600Cmd(port)
+            sim7600.set_echo_command(False)
+
             sim7600.open_connection()
             logging.info(f"Connexion réussie sur le port {port}.")
             break
@@ -361,17 +389,20 @@ def main():
         sim7600.set_network_mode(NetworkType.AUTO)
         response = sim7600.send_command("AT")
         logging.info(f"Réponse reçue: {response}")
-        response,_ = sim7600.get_signal_quality()  # Vérifiez la qualité du signal
+        response, _ = sim7600.get_signal_quality()  # Vérifiez la qualité du signal
         logging.info(f"Réponse reçue: {response}")
         response = sim7600.get_operator_info()  # Récupérez les informations sur l'opérateur
         logging.info(f"Réponse reçue: {response}")
         response = sim7600.get_lte_cell_id()  # Essayez de récupérer le Cell ID LTE
         logging.info(f"Réponse reçue: {response}")
 
-        response=sim7600.get_network_type_str()
+        response = sim7600.get_network_type_str()
         logging.info(f"Réponse reçue: {response} ")
 
         sim7600.print_network_status()
+
+        time.sleep(2)
+        # sim7600.reset_module()
 
 
     except SerialException as es:

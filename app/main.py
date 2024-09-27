@@ -1,7 +1,7 @@
 import asyncio
 import logging
 
-from SIM7600.SIM7600 import SIM7600
+from SIM7600.SIM7600Cmd import SIM7600Cmd
 
 # Configuration du logger
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -12,7 +12,7 @@ class SerialPortError(Exception):
 
 
 async def main():
-    sim7600 = SIM7600()
+    sim7600 = SIM7600Cmd()
     await sim7600.open()
 
     try:

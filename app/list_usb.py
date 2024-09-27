@@ -5,7 +5,7 @@ def categorize_ports():
     ports = serial.tools.list_ports.comports()
 
     if not ports:
-        print("Aucun port COM trouvé.")
+        #print("Aucun port COM trouvé.")
         return
 
     categorized_ports = {
@@ -40,6 +40,8 @@ def categorize_ports():
 
 
 def get_ports_by_category(categorized_ports, category):
+    if categorized_ports is None:
+        return None
     return categorized_ports.get(category, [])
 
 

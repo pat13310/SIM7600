@@ -1,6 +1,6 @@
 import logging
 import serial
-from SIM7600 import SIM7600  # Assurez-vous que SIM7600 est également en mode synchrone
+from SIM7600 import SIM7600Cmd  # Assurez-vous que SIM7600 est également en mode synchrone
 
 
 class SIM7600Data(SIM7600):

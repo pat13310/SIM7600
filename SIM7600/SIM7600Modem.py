@@ -1,6 +1,6 @@
 import logging
 import time
-from SIM7600 import SIM7600  # Assurez-vous d'importer correctement votre classe SIM7600
+from SIM7600 import SIM7600Cmd  # Assurez-vous d'importer correctement votre classe SIM7600
 
 class SIM7600Modem(SIM7600):
     def __init__(self, port, apn="Lebara"):

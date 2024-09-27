@@ -4,7 +4,7 @@ import time
 import enum
 
 
-from SIM7600 import SIM7600
+from SIM7600Cmd import SIM7600Cmd
 from SerialPortCategorizer import SerialPortCategorizer
 from TextToSpeech import TextToSpeech
 
@@ -14,7 +14,7 @@ class TypeCall(enum.Enum):
     AUTOMATE=1
 
 
-class SIM7600Voice(SIM7600):
+class SIM7600Voice(SIM7600Cmd):
     def __init__(self, port, tts=None):
         """Initialise le module vocal sur le port spécifié."""
         super().__init__(port)
@@ -28,7 +28,7 @@ class SIM7600Voice(SIM7600):
         """Compose un numéro de téléphone et détecte le décrochage de l'appelé."""
         self.phone = phone_number
         response = self.send_command(f'ATD{phone_number};')
-        if 'OK' in response:
+        if 'ATD' in response:
             logging.info("Appel lancé avec succès.")
             self._wait_for_connection()
         else:
@@ -59,7 +59,7 @@ class SIM7600Voice(SIM7600):
     def enable_caller_id(self):
         """Active l'identification de l'appelant (CLI)."""
         response = self.send_command('AT+CLIP=1')
-        if 'OK' in response:
+        if 'CLIP' in response:
             logging.info("Identification de l'appelant activée.")
         else:
             logging.error("Erreur lors de l'activation de l'identification de l'appelant.")
@@ -135,16 +135,13 @@ class SIM7600Voice(SIM7600):
 def main():
     serp = SerialPortCategorizer()
     port=serp.get_port("at")
-    tts = TextToSpeech()
-    sim7600_voice = SIM7600Voice(port, tts)
+    # tts = TextToSpeech()
+    sim7600_voice = SIM7600Voice(port)
     try:
         sim7600_voice.open_connection()
-
-        # Activer l'identification de l'appelant
         sim7600_voice.enable_caller_id()
-        sim7600_voice.set_volume(5)  # Régler le volume à 50%
+        #sim7600_voice.set_volume(5)  # Régler le volume à 50%
         #sim7600_voice.set_automate_text("Salut, c'est un message automatique du module SIM 7600")
-
         # Composer un appel
         sim7600_voice.call("0665167626")
 

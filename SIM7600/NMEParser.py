@@ -1,7 +1,7 @@
 import re
 
 
-class NMEParser():
+class NMEParser:
     def __init__(self):
         print('NMEParser')
         pass

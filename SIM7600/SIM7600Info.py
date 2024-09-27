@@ -2,10 +2,10 @@ import logging
 import re
 from serial.serialutil import SerialException
 
-from SIM7600 import SIM7600
+from SIM7600Cmd import SIM7600Cmd
 
 
-class SIM7600Info(SIM7600):
+class SIM7600Info(SIM7600Cmd):
     def __init__(self, port, baudrate=115200, timeout=2):
         super().__init__(port, baudrate, timeout)
 

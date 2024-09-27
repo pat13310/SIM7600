@@ -7,295 +7,439 @@ Voici la description de la classe SIM7600 et ses principales classes :
 
 La classe SIM7600 est conçue pour interagir avec un modem SIM7600, permettant la gestion des communications cellulaires.
 
+
+## Documentation des fonctions principales
+
 ### Initialisation
 
 ```python
-modem = SIM7600(port="COM17", baudrate=115200, timeout=2)
+sim7600 = SIM7600Cmd("COM17", baudrate=115200, timeout=2)
+sim7600.open_connection()
 ```
 
-Cette ligne crée une instance de la classe SIM7600, configurée pour communiquer via le port COM17 avec un débit de 115200 bauds et un délai d'attente de 2 secondes[1].
+Cette séquence initialise l'objet SIM7600Cmd et ouvre la connexion série.
 
-### Fonctions principales
-
-#### Ouverture de la connexion
+### Vérification de la carte SIM
 
 ```python
-modem.open_connection()
-```
-
-Cette fonction ouvre la connexion série avec le modem. Elle doit être appelée avant toute autre opération[1].
-
-#### Envoi de commandes AT
-
-```python
-response = modem.send_command("AT+CSQ")
-print(f"Qualité du signal : {response}")
-```
-
-Cette fonction envoie une commande AT au modem et retourne la réponse. Dans cet exemple, elle récupère la qualité du signal[1].
-
-#### Vérification de la carte SIM
-
-```python
-if modem.check_sim_card():
+if sim7600.check_sim_card():
     print("Carte SIM détectée et prête")
 else:
     print("Problème avec la carte SIM")
 ```
 
-Cette fonction vérifie si une carte SIM est présente et prête à être utilisée[1].
+Vérifie si une carte SIM est présente et fonctionnelle.
 
-#### Récupération de la qualité du signal
-
-```python
-dbm, quality = modem.get_signal_quality()
-print(f"Force du signal : {dbm} dBm, Qualité : {quality}")
-```
-
-Cette fonction retourne la force du signal en dBm et une interprétation qualitative[1].
-
-#### Configuration du mode réseau
+### Configuration du mode réseau
 
 ```python
-modem.set_network_mode(NetworkType.AUTO)
-print(f"Mode réseau actuel : {modem.get_network_type_str()}")
+from SIM7600Cmd import NetworkType
+
+sim7600.set_network_mode(NetworkType.AUTO)
+print(f"Mode réseau actuel : {sim7600.get_network_type_str()}")
 ```
 
-Cette fonction permet de définir le mode réseau (2G, 3G, 4G, 5G ou automatique) et de vérifier le mode actuel[1].
+Configure le mode réseau et affiche le mode actuel.
 
-#### Vérification de l'enregistrement réseau
+### Qualité du signal
 
 ```python
-try:
-    network_info = modem.check_network_registration()
-    print(f"Statut d'enregistrement : {network_info['status'].name}")
-    print(f"Opérateur : {network_info['operator']}")
-except RegistrationError as e:
-    print(f"Erreur d'enregistrement : {e}")
+dbm, quality = sim7600.get_signal_quality()
+print(f"Qualité du signal : {dbm} dBm ({quality})")
 ```
 
-Cette fonction fournit des informations détaillées sur l'enregistrement du modem au réseau cellulaire[1].
+Récupère et affiche la qualité du signal en dBm avec une interprétation.
 
-#### Affichage du statut réseau
+### Informations sur l'opérateur
 
 ```python
-modem.print_network_status()
+operator_info = sim7600.get_operator_info()
+print(f"Informations opérateur : {operator_info}")
 ```
 
-Cette fonction affiche un résumé complet du statut réseau, incluant l'enregistrement, le type de réseau, la qualité du signal, et d'autres informations pertinentes[1].
+Obtient et affiche les informations sur l'opérateur réseau.
 
-#### Fermeture de la connexion
+### Statut du réseau
 
 ```python
-modem.close_connection()
+sim7600.print_network_status()
 ```
 
-Cette fonction ferme proprement la connexion série avec le modem. Elle doit être appelée à la fin de l'utilisation du modem[1].
+Affiche un résumé détaillé du statut réseau.
 
-## Énumérations et exceptions
+### Activation du GPS
 
-La classe utilise plusieurs énumérations pour représenter les différents états et types de réseau :
+```python
+sim7600.enable_gps()
+```
 
-- `NetworkStatus` : représente les différents états d'enregistrement au réseau.
-- `NetworkType` : représente les différents types de réseaux cellulaires (2G, 3G, 4G, 5G, AUTO).
+Active le module GPS.
 
-Une exception personnalisée `RegistrationError` est également définie pour gérer les erreurs spécifiques à l'enregistrement réseau[1].
+### Réinitialisation du module
 
-## Logging
+```python
+sim7600.reset_module()
+```
 
-La classe utilise le module `logging` avec une configuration colorée pour faciliter le débogage et le suivi des opérations[1].
+Réinitialise les configurations du modem.
 
-Cette classe SIM7600 offre une interface complète pour gérer les communications cellulaires, permettant un contrôle fin du modem et l'accès à diverses informations réseau.
+### Fermeture de la connexion
 
+```python
+sim7600.close_connection()
+```
+
+Ferme la connexion série.
+
+## Script complet
+
+Voici un script complet qui utilise les fonctions principales :
+
+```python
+from SIM7600Cmd import SIM7600Cmd, NetworkType, setup_logging
+import logging
+import time
+
+def main():
+    setup_logging()
+    sim7600 = SIM7600Cmd("COM17")
+    
+    try:
+        sim7600.open_connection()
+        logging.info("Connexion ouverte")
+
+        if sim7600.check_sim_card():
+            logging.info("Carte SIM détectée")
+        else:
+            logging.error("Problème avec la carte SIM")
+            return
+
+        sim7600.set_network_mode(NetworkType.AUTO)
+        logging.info(f"Mode réseau : {sim7600.get_network_type_str()}")
+
+        dbm, quality = sim7600.get_signal_quality()
+        logging.info(f"Signal : {dbm} dBm ({quality})")
+
+        operator_info = sim7600.get_operator_info()
+        logging.info(f"Opérateur : {operator_info}")
+
+        sim7600.print_network_status()
+
+        sim7600.enable_gps()
+        logging.info("GPS activé")
+
+        time.sleep(10)  # Attente de 10 secondes
+
+        sim7600.reset_module()
+        logging.info("Module réinitialisé")
+
+    except Exception as e:
+        logging.error(f"Erreur : {e}")
+    finally:
+        sim7600.close_connection()
+        logging.info("Connexion fermée")
+
+if __name__ == "__main__":
+    main()
+```
+
+Ce script démontre l'utilisation des principales fonctions de la classe SIM7600Cmd dans un scénario typique. Il initialise le module, vérifie la carte SIM, configure le réseau, obtient des informations sur le signal et l'opérateur, active le GPS, attend un peu, puis réinitialise le module. Le script gère également les exceptions et assure la fermeture de la connexion, même en cas d'erreur.
 <br>
+
+## Classe SIM7600Info
+
+Voici la documentation révisée avec des exemples pour les fonctions principales de la classe SIM7600Info, suivie d'un script complet à la fin :
+
+## Documentation des fonctions principales
+
+### Initialisation
+
+```python
+sim_info = SIM7600Info("COM17", baudrate=115200, timeout=2)
+sim_info.open_connection()
+```
+
+Cette séquence initialise l'objet SIM7600Info et ouvre la connexion série.
+
+### Obtenir la version du firmware
+
+```python
+firmware_version = sim_info.get_firmware_version()
+print(f"Version du firmware : {firmware_version}")
+```
+
+Récupère la version du firmware du module.
+
+### Obtenir le fabricant
+
+```python
+manufacturer = sim_info.get_manufacturer()
+print(f"Fabricant : {manufacturer}")
+```
+
+Récupère le nom du fabricant du module.
+
+### Obtenir le numéro de série
+
+```python
+serial_number = sim_info.get_serial_number()
+print(f"Numéro de série : {serial_number}")
+```
+
+Récupère le numéro de série du module.
+
+### Obtenir la version du module
+
+```python
+module_version = sim_info.get_module_version()
+print(f"Version du module : {module_version}")
+```
+
+Récupère la version du module.
+
+### Obtenir les informations du chip
+
+```python
+chip_info = sim_info.get_chip_info()
+print(f"Version du sous-système : {chip_info['sub_version']}")
+print(f"Version du modem : {chip_info['modem_version']}")
+```
+
+Récupère les informations détaillées du chip.
+
+### Obtenir les informations complètes
+
+```python
+full_info = sim_info.get_full_info()
+print(f"Modèle : {full_info['Modèle']}")
+print(f"Révision : {full_info['Révision']}")
+print(f"IMEI : {full_info['IMEI']}")
+```
+
+Récupère les informations complètes du module, y compris le modèle, la révision et l'IMEI.
+
+### Afficher toutes les informations
+
+```python
+sim_info.print_all_info()
+```
+
+Affiche toutes les informations du module de manière formatée.
+
+## Script complet
+
+Voici un script complet qui utilise les fonctions principales de la classe SIM7600Info :
+
+```python
+from SIM7600Info import SIM7600Info
+import logging
+from serial.serialutil import SerialException
+
+def setup_logging():
+    logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
+
+def main():
+    setup_logging()
+    ports_to_try = ["COM17", "COM18", "COM19"]  # Ajoutez d'autres ports si nécessaire
+    sim_info = None
+
+    for port in ports_to_try:
+        try:
+            sim_info = SIM7600Info(port)
+            sim_info.set_echo_command(False)
+            sim_info.open_connection()
+            logging.info(f"Connexion réussie sur le port {port}.")
+            break
+        except SerialException as e:
+            logging.warning(f"Le port {port} est indisponible: {e}")
+        except Exception as e:
+            logging.error(f"Erreur inattendue lors de l'ouverture du port {port}: {e}")
+
+    if sim_info is None:
+        logging.critical("Impossible de se connecter à un port série.")
+        return
+
+    try:
+        # Récupération et affichage des informations individuelles
+        logging.info(f"Version du firmware : {sim_info.get_firmware_version()}")
+        logging.info(f"Fabricant : {sim_info.get_manufacturer()}")
+        logging.info(f"Numéro de série : {sim_info.get_serial_number()}")
+        logging.info(f"Version du module : {sim_info.get_module_version()}")
+
+        chip_info = sim_info.get_chip_info()
+        logging.info(f"Information du chip: sub version : {chip_info['sub_version']}")
+        logging.info(f"Information du chip: modem version : {chip_info['modem_version']}")
+
+        full_info = sim_info.get_full_info()
+        logging.info(f"Modèle : {full_info['Modèle']}")
+        logging.info(f"Révision : {full_info['Révision']}")
+        logging.info(f"IMEI : {full_info['IMEI']}")
+
+        # Affichage de toutes les informations en une fois
+        logging.info("Affichage de toutes les informations :")
+        sim_info.print_all_info()
+
+    except Exception as er:
+        logging.error(f"Erreur inattendue: {er}")
+    finally:
+        sim_info.close_connection()
+        logging.info("Connexion fermée.")
+
+if __name__ == '__main__':
+    try:
+        main()
+    except Exception as e:
+        logging.error(f"Erreur non gérée: {e}")
+```
+
+Ce script démontre l'utilisation des principales fonctions de la classe SIM7600Info. Il tente de se connecter à différents ports série, récupère et affiche diverses informations sur le module SIM7600, et gère les exceptions potentielles. Le script utilise également la fonction `print_all_info()` pour afficher toutes les informations en une seule fois.
+<br>
+
+Voici la documentation révisée avec des exemples pour les fonctions principales de la classe SIM7600SMS, suivie d'une explication de son utilité :
 
 ## Classe SIM7600SMS
 
-La classe SIM7600SMS hérite de SIM7600 et ajoute des fonctionnalités spécifiques pour la gestion des SMS.
+La classe SIM7600SMS est une extension de SIM7600Cmd spécialisée dans la gestion des SMS. Elle permet d'envoyer, lire et supprimer des SMS sur un module SIM7600.
 
 ### Initialisation
 
 ```python
-sms = SIM7600SMS(port="COM17", baudrate=115200, timeout=2)
+sim_sms = SIM7600SMS("COM17", baudrate=115200, timeout=2)
+sim_sms.open_connection()
 ```
 
-Cette ligne crée une instance de la classe SIM7600SMS, configurée pour communiquer via le port COM17 avec un débit de 115200 bauds et un délai d'attente de 2 secondes.
+Cette séquence initialise l'objet SIM7600SMS et ouvre la connexion série.
 
-### Fonctions principales
-
-#### Vérification de la carte SIM
+### Vérification de la carte SIM
 
 ```python
-if sms.check_sim_card():
+if sim_sms.check_sim_card():
     print("Carte SIM détectée et prête")
 else:
     print("Problème avec la carte SIM")
 ```
 
-Cette fonction vérifie si une carte SIM est présente et prête à être utilisée.
+Vérifie si une carte SIM est présente et fonctionnelle.
 
-#### Envoi de SMS
-
-```python
-response = sms.send_sms("0612345678", "Bonjour, ceci est un test!")
-print(f"Réponse de l'envoi de SMS : {response}")
-```
-
-Cette fonction envoie un SMS au numéro spécifié avec le message donné.
-
-#### Lecture des SMS
+### Envoi d'un SMS
 
 ```python
-sms_list = sms.read_sms()
-print(f"SMS reçus : {sms_list}")
+response = sim_sms.send_sms("+33612345678", "Bonjour, ceci est un test.")
+print(f"Réponse à l'envoi de SMS: {response}")
 ```
 
-Cette fonction récupère tous les SMS stockés dans la mémoire du modem.
+Envoie un SMS au numéro spécifié avec le message donné.
 
-#### Suppression de SMS
+### Lecture des SMS
 
 ```python
-sms.delete_sms(1)
+messages = sim_sms.read_sms()
+for sms in messages:
+    print(f"De: {sms['phone_number']}, Date: {sms['date']}, Message: {sms['content']}")
 ```
 
-Cette fonction supprime le SMS à l'index spécifié.
+Lit tous les SMS stockés sur la carte SIM.
 
-### Fonctionnalités supplémentaires
-
-#### Lecture avec suppression automatique
+### Suppression d'un SMS
 
 ```python
-sms_list = sms.read_sms(delete_action=True)
-print(f"SMS lus et supprimés : {sms_list}")
+sim_sms.delete_sms(1)  # Supprime le SMS à l'index 1
 ```
 
-Cette option permet de lire tous les SMS et de les supprimer automatiquement après la lecture.
+Supprime un SMS spécifique par son index.
 
-#### Lecture de la réponse du modem
+### Lecture et suppression des SMS
 
 ```python
-response = sms.read_response()
-print(f"Réponse du modem : {response}")
+messages = sim_sms.read_sms(delete_action=True)
+for sms in messages:
+    print(f"SMS lu et supprimé: {sms['content']}")
 ```
 
-Cette fonction lit la réponse du module série, utile pour le débogage ou la gestion des réponses asynchrones.
+Lit tous les SMS et les supprime après lecture.
 
-## Gestion des erreurs
+## Utilité de la classe SIM7600SMS
 
-La classe SIM7600SMS intègre une gestion des erreurs robuste :
+La classe SIM7600SMS est conçue pour simplifier la gestion des SMS sur un module SIM7600. Elle offre les fonctionnalités suivantes :
 
-- Vérification de la présence de la carte SIM avant chaque opération SMS.
-- Logging des erreurs et des informations importantes.
-- Gestion des exceptions pour les opérations critiques.
+1. **Gestion des SMS** : Permet d'envoyer, lire et supprimer des SMS facilement.
+2. **Décodage automatique** : Gère le décodage des messages, y compris pour les caractères non-ASCII.
+3. **Vérification de la carte SIM** : S'assure que la carte SIM est présente et prête avant d'effectuer des opérations.
+4. **Gestion des erreurs** : Inclut une gestion des erreurs pour les opérations liées aux SMS.
+5. **Flexibilité** : Permet de lire les SMS avec ou sans suppression automatique.
 
-## Utilisation dans un script principal
+Cette classe est particulièrement utile pour les projets IoT ou de télémétrie nécessitant une communication par SMS, comme les systèmes d'alerte, la surveillance à distance, ou la commande à distance via SMS.
 
-```python
-def main():
-    sms = SIM7600SMS(port="COM17")
-    try:
-        sms.open_connection()
-        if sms.check_sim_card():
-            sms.send_sms("0612345678", "Message test")
-            sms_list = sms.read_sms()
-            print(f"SMS reçus : {sms_list}")
-    except Exception as e:
-        logging.error(f"Erreur : {e}")
-    finally:
-        sms.close_connection()
 
-if __name__ == "__main__":
-    main()
-```
-
-Ce script principal illustre l'utilisation typique de la classe SIM7600SMS, avec ouverture de la connexion, vérification de la carte SIM, envoi et lecture de SMS, et fermeture propre de la connexion.
 <br>
+Voici la documentation révisée avec des exemples pour les fonctions principales de la classe SIM7600GPS, suivie d'une explication de son utilité :
 
-## Classe SIMGPS
+## Classe SIM7600GPS
 
-La classe SIMGPS hérite de SIM7600 et ajoute des fonctionnalités spécifiques pour la gestion du GPS.
+La classe SIM7600GPS est une extension de SIM7600Cmd spécialisée dans la gestion du module GPS du SIM7600.
 
 ### Initialisation
 
 ```python
-gps = SIMGPS(port="COM16", baudrate=115200, timeout=2)
+sim_gps = SIM7600GPS("COM17", baudrate=115200, timeout=2)
+sim_gps.open_connection()
 ```
 
-Cette ligne crée une instance de la classe SIMGPS, configurée pour communiquer via le port COM16 avec un débit de 115200 bauds et un délai d'attente de 2 secondes.
+Cette séquence initialise l'objet SIM7600GPS et ouvre la connexion série.
 
-### Fonctions principales
-
-#### Activation du GPS
+### Récupération des données GPS
 
 ```python
-gps.enable_gps()
-```
-
-Cette fonction active le module GPS du modem.
-
-#### Récupération des données GPS
-
-```python
-gps_data = gps.get_gps_data()
+gps_data = sim_gps.get_gps_data()
 if gps_data:
-    print(f"Données GPS : {gps_data}")
+    for data in gps_data:
+        if len(data) > 16:
+            print(data)
 else:
-    print("Aucune donnée GPS valide reçue.")
+    print("Aucune donnée GPS disponible")
 ```
 
-Cette fonction récupère les données GPS actuelles du modem.
+Récupère les données GPS si disponibles.
 
-#### Désactivation du GPS
+### Vérification de l'état du GPS
 
 ```python
-gps.disable_gps()
+if sim_gps.is_ready():
+    print("Le GPS a une position fixe")
+else:
+    print("Le GPS n'a pas encore de position fixe")
 ```
 
-Cette fonction désactive le module GPS du modem.
+Vérifie si le GPS a une position fixe.
 
-### Gestion des erreurs
-
-La classe SIMGPS intègre une gestion des erreurs robuste :
-
-- Logging des erreurs et des informations importantes.
-- Gestion des exceptions pour les opérations critiques.
-
-## Utilisation dans un script principal
+### Désactivation du GPS
 
 ```python
-def main():
-    gps = SIMGPS(port="COM16")
-    try:
-        gps.open_connection()
-        gps.enable_gps()
-        
-        # Attente pour obtenir un fix GPS
-        time.sleep(5)
-        
-        for _ in range(100):
-            gps_data = gps.get_gps_data()
-            if gps_data:
-                logging.info(f"Données GPS : {gps_data}")
-            else:
-                logging.error("Aucune donnée GPS valide reçue.")
-        
-        gps.disable_gps()
-    except Exception as e:
-        logging.error(f"Erreur : {e}")
-    finally:
-        gps.close_connection()
-
-if __name__ == "__main__":
-    main()
+sim_gps.disable_gps()
 ```
 
-Ce script principal illustre l'utilisation typique de la classe SIMGPS, avec ouverture de la connexion, activation du GPS, récupération des données GPS en boucle, désactivation du GPS, et fermeture propre de la connexion.
+Désactive le module GPS.
 
-## Particularités
+## Utilité de la classe SIM7600GPS
 
-- La classe utilise des commandes AT spécifiques pour gérer le GPS (AT+CGPS).
-- Un délai est introduit après l'activation du GPS pour permettre l'obtention d'un fix.
-- La récupération des données GPS se fait en boucle pour obtenir des mises à jour continues.
+La classe SIM7600GPS est conçue pour simplifier l'utilisation du module GPS intégré au SIM7600. Elle offre les fonctionnalités suivantes :
+
+1. **Gestion du GPS** : Permet d'activer, désactiver et récupérer les données GPS facilement.
+2. **Vérification de l'état** : Fournit une méthode pour vérifier si le GPS a une position fixe.
+3. **Traitement des données** : Gère le traitement initial des données GPS brutes.
+4. **Intégration avec SIM7600Cmd** : Hérite des fonctionnalités de base de SIM7600Cmd pour une utilisation cohérente avec d'autres fonctionnalités du module.
+
+Cette classe est particulièrement utile pour les projets nécessitant une localisation précise, comme :
+- Le suivi de véhicules ou d'actifs
+- Les applications de navigation
+- La géolocalisation pour l'IoT
+- La collecte de données géographiques
+
+En simplifiant l'interface avec le module GPS du SIM7600, cette classe permet aux développeurs de se concentrer sur l'utilisation des données GPS plutôt que sur les détails de communication avec le matériel.
+
+Citations:
+[1] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/19879401/cdb8ba2d-61c6-4354-a7ea-7f3f08edf141/paste.txt
+[2] https://ppl-ai-file-upload.s3.amazonaws.com/web/direct-files/19879401/b5e71edf-6a37-4c41-807a-339d339e8955/paste.txt
 ## Matériels nécessaires
 <image src="https://github.com/user-attachments/assets/0a546fb1-bd19-48cc-8baa-9fa6e748a9d2" height="200px">
 <br>
@@ -303,100 +447,72 @@ Ce script principal illustre l'utilisation typique de la classe SIMGPS, avec ouv
 Cette classe SIMGPS offre une interface simple pour gérer les fonctionnalités GPS d'un modem SIM7600, permettant une intégration facile dans des projets nécessitant des capacités de géolocalisation.
 <br>
 
-## Classe SIM7600MQTT
 
-La classe SIM7600MQTT hérite de SIM7600 et ajoute des fonctionnalités pour la communication MQTT via un modem cellulaire.
+<br>
+Voici la documentation révisée avec des exemples pour les fonctions principales de la classe SIM7600MQTT, suivie d'une explication de son utilité :
+
+## SIM7600MQTT
+
+La classe SIM7600MQTT étend SIM7600Cmd pour ajouter des fonctionnalités MQTT au module SIM7600.
 
 ### Initialisation
 
 ```python
-mqtt_modem = SIM7600MQTT(port="COM17", apn="m2m.lebara.fr", broker="test.mosquitto.org", port_mqtt=1883)
+sim_mqtt = SIM7600MQTT(port="COM17", apn="m2m.lebara.fr", broker="test.mosquitto.org", port_mqtt=1883)
 ```
 
-Cette ligne crée une instance de la classe SIM7600MQTT, configurée pour communiquer via le port COM17, utiliser l'APN "m2m.lebara.fr", et se connecter au broker MQTT "test.mosquitto.org" sur le port 1883.
+Initialise l'objet SIM7600MQTT avec le port série, l'APN, l'adresse du broker MQTT et le port MQTT.
 
-### Fonctions principales
-
-#### Configuration de l'APN
+### Configuration de l'APN et connexion
 
 ```python
-mqtt_modem.configure_apn()
-```
-
-Cette fonction configure l'APN pour la connexion de données cellulaires.
-
-#### Établissement de la connexion
-
-```python
-ip = mqtt_modem.connect()
+sim_mqtt.configure_apn()
+ip = sim_mqtt.connect()
 print(f"Adresse IP: {ip}")
 ```
 
-Cette fonction établit une connexion de données GPRS et retourne l'adresse IP attribuée.
+Configure l'APN et établit une connexion de données GPRS.
 
-#### Connexion au broker MQTT
-
-```python
-mqtt_modem.connect_mqtt()
-```
-
-Cette fonction connecte le client Paho MQTT au broker spécifié.
-
-#### Publication de messages MQTT
+### Connexion au broker MQTT
 
 ```python
-mqtt_modem.publish("test/topic", "Hello, MQTT via SIM7600!")
+sim_mqtt.connect_mqtt()
 ```
 
-Cette fonction publie un message sur un topic MQTT spécifié.
+Connecte le client au broker MQTT spécifié.
 
-#### Fermeture des connexions
+### Publication d'un message
 
 ```python
-mqtt_modem.close()
+sim_mqtt.publish("test/topic", "Hello, MQTT via SIM7600!")
 ```
 
-Cette fonction ferme la connexion au broker MQTT et la connexion série.
+Publie un message sur un topic MQTT spécifié.
 
-### Callbacks MQTT
-
-La classe définit également des callbacks pour gérer les événements MQTT :
-
-- `on_connect`: Appelé lors de la connexion au broker
-- `on_message`: Appelé lors de la réception d'un message
-- `on_publish`: Appelé après la publication d'un message
-
-## Utilisation dans un script principal
+### Fermeture des connexions
 
 ```python
-if __name__ == "__main__":
-    logging.basicConfig(level=logging.INFO)
-    mqtt_modem = SIM7600MQTT(port="COM17", apn="m2m.lebara.fr", broker="test.mosquitto.org")
-
-    try:
-        ip = mqtt_modem.connect()
-        logging.info(f"Adresse IP: {ip}")
-
-        mqtt_modem.connect_mqtt()
-
-        for i in range(10000):
-            message = f"Message {i}: Hello, MQTT via SIM7600!"
-            mqtt_modem.publish("test/topic", message)
-
-        time.sleep(2)
-
-    except Exception as e:
-        logging.error(f"Erreur: {e}")
-    finally:
-        mqtt_modem.close()
+sim_mqtt.close()
 ```
 
-Ce script principal illustre l'utilisation typique de la classe SIM7600MQTT, avec l'établissement de la connexion cellulaire, la connexion au broker MQTT, la publication de messages en boucle, et la fermeture propre des connexions.
+Ferme la connexion au broker MQTT et la connexion série.
 
-Cette classe SIM7600MQTT offre une interface simple pour combiner les fonctionnalités d'un modem cellulaire SIM7600 avec la communication MQTT, permettant une intégration facile dans des projets IoT nécessitant une connectivité cellulaire.
+## Utilité de la classe SIM7600MQTT
 
+La classe SIM7600MQTT est conçue pour faciliter l'utilisation du protocole MQTT sur un module SIM7600. Elle offre les fonctionnalités suivantes :
+
+1. **Gestion de la connexion cellulaire** : Configure l'APN et établit une connexion de données GPRS.
+2. **Intégration MQTT** : Utilise la bibliothèque Paho MQTT pour gérer les communications MQTT.
+3. **Simplicité d'utilisation** : Encapsule les détails de la connexion cellulaire et MQTT dans une interface simple.
+4. **Callbacks personnalisables** : Permet de définir des comportements personnalisés pour les événements MQTT (connexion, réception de message, publication).
+
+Cette classe est particulièrement utile pour :
+- Les projets IoT nécessitant une communication MQTT sur réseau cellulaire
+- La télémétrie à distance
+- Les systèmes de contrôle et de surveillance utilisant MQTT comme protocole de communication
+
+En combinant les fonctionnalités du module SIM7600 avec le protocole MQTT, cette classe permet de créer facilement des dispositifs IoT connectés capables de communiquer efficacement sur de longues distances via le réseau cellulaire.
 <br>
-
 ## Classe SerialPortCategorizer
 Voici des exemples d'utilisation pour chaque fonction de la classe SerialPortCategorizer :
 
@@ -476,138 +592,3 @@ if __name__ == "__main__":
 
 Ce script principal démontre l'utilisation de toutes les fonctions de la classe SerialPortCategorizer, en affichant les ports catégorisés, en obtenant des ports spécifiques, et en listant tous les ports d'une catégorie donnée.
 <br>
-## Classe SIM7600Info 
-
-La classe `SIM7600Info` permet d'interagir avec le module SIM7600 et de récupérer des informations telles que la version du firmware, le fabricant, le numéro de série, la version du module, les informations sur la puce, et d'autres détails pertinents.
-
-### Héritage
-
-Cette classe hérite de la classe `SIM7600`.
-
-### Constructeur
-
-#### `__init__(self, port, baudrate=115200, timeout=2)`
-
-Initialise une instance de `SIM7600Info`.
-
-#### Paramètres
-- `port` (str): Le port série à utiliser pour la communication avec le module SIM7600.
-- `baudrate` (int, optionnel): La vitesse de transmission (défaut: 115200).
-- `timeout` (int, optionnel): Le délai d'attente pour les opérations de communication (défaut: 2 secondes).
-
-#### Exemple
-```python
-sim7600 = SIM7600Info(port="COM17")
-```
-
-
-
-### Version du firmware
-
-Récupère la version du firmware du module SIM7600.
-
-
-#### Exemple
-```python
-version = sim7600.get_firmware_version()
-print("Version du firmware:", version)
-```
-
-### Nom du fabricant 
-
-Récupère le nom du fabricant du module SIM7600.
-
-
-#### Exemple
-```python
-manufacturer = sim7600.get_manufacturer()
-print("Fabricant:", manufacturer)
-```
-
-### Numéro de série
-
-Récupère le numéro de série du module SIM7600.
-
-
-#### Exemple
-```python
-serial_number = sim7600.get_serial_number()
-print("Numéro de série:", serial_number)
-```
-
-### Numéro de version du module
-
-Récupère la version du module SIM7600 sous forme de chaîne
-
-#### Exemple
-```python
-module_version = sim7600.get_module_version()
-print("Version du module:", module_version)
-```
-
-### Informations de la puce
-
-Récupère les informations de la puce du module SIM7600, y compris la version du sous-système et la version du modem sous forme de dictionnaire
-
-
-#### Exemple
-```python
-chip_info = sim7600.get_chip_info()
-print("Informations de la puce: numéro de sub version", chip_info['sub_version')
-print("Informations de la puce: numéro du modem version", chip_info['modem_version')
-```
-
-### Récupération du modèle , le numéro de révision et l'IMEI 
-
-Récupère des informations complètes sur le module SIM7600, y compris le modèle, la révision et l'IMEI.
-
-
-#### Exemple
-```python
-full_info = sim7600.get_full_info()
-print("Modèle: ", full_info['Modèle'])
-print("Révision: ", full_info['Révision'])
-print("IMEI: ", full_info['IMEI'])
-```
-
-### Afficher toutes les informations
-
-Affiche toutes les informations du module SIM7600 en utilisant le module de logging.
-
-#### Exemple
-```python
-sim7600.print_all_info()
-```
-
-## Exemple d'utilisation
-
-Voici un exemple complet d'utilisation de la classe `SIM7600Info` :
-
-```python
-import logging
-from SIM7600Info import SIM7600Info
-
-# Configurer le logging
-logging.basicConfig(level=logging.INFO)
-
-def main():
-    sim_info = SIM7600Info(port="COM17")
-    
-    try:
-        sim_info.open_connection()
-        logging.info("Connexion réussie.")
-        sim_info.print_all_info()
-    except Exception as e:
-        logging.error(f"Erreur: {e}")
-    finally:
-        sim_info.close_connection()
-
-if __name__ == "__main__":
-    main()
-```
-
-<br>
-La classe SIM7600Info offre une interface facile à utiliser pour récupérer et afficher les informations du module SIM7600. En suivant cette documentation, vous devriez être en mesure de l'utiliser efficacement dans vos applications.
-
-
-

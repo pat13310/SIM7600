@@ -3,9 +3,9 @@ import time
 
 import paho.mqtt.client as mqtt
 
-from SIM7600 import SIM7600
+from SIM7600Cmd import SIM7600Cmd
 
-class SIM7600MQTT(SIM7600):
+class SIM7600MQTT(SIM7600Cmd):
     def __init__(self, port, apn, broker, port_mqtt=1883):
         super().__init__(port)
         self.apn = apn
